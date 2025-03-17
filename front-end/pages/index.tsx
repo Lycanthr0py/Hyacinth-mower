@@ -11,7 +11,7 @@ export default function Homepage() {
 
             <main>
                 <div>
-                    <BatteryDisplay percentage={100}/>
+                    <BatteryDisplay percentage={20}/>
                 </div>
             </main>
         </>
