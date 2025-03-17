@@ -1,4 +1,5 @@
 import Head from "next/head";
+import BatteryDisplay from "@components/displays/BatteryDisplay";
 
 export default function Homepage() {
 
@@ -10,7 +11,7 @@ export default function Homepage() {
 
             <main>
                 <div>
-                    
+                    <BatteryDisplay percentage={100}/>
                 </div>
             </main>
         </>
