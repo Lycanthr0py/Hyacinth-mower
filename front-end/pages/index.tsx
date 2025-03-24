@@ -1,5 +1,6 @@
 import Head from "next/head";
 import BatteryDisplay from "@components/displays/BatteryDisplay";
+import LocatorDisplay from "@components/displays/LocatorDisplay";
 
 export default function Homepage() {
 
@@ -10,7 +11,8 @@ export default function Homepage() {
             </Head>
 
             <main>
-                <div>
+                <div className="flex flex-col">
+                    <LocatorDisplay/>
                     <BatteryDisplay percentage={20}/>
                 </div>
             </main>
