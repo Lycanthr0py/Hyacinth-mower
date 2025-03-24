@@ -8,8 +8,8 @@ const LocatorDisplay: React.FC = () => {
   return (
     <iframe
       ref={mapRef}
-      width="100%"
-      height="400px"
+      width="70%"
+      height="600px"
       style={{ border: 0 }}
       loading="lazy"
       allowFullScreen
