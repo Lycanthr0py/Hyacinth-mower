@@ -2,8 +2,9 @@ import React, { useEffect, useRef } from "react";
 
 const LocatorDisplay: React.FC = () => {
   const mapRef = useRef<HTMLIFrameElement>(null);
-  const latitude = 50.86424685900107;
-  const longitude = 4.706057776901822;
+  const latitude = -25.747592;
+  const longitude = 27.864435;
+  const zoom = 14;
 
   return (
     <iframe
@@ -14,7 +15,7 @@ const LocatorDisplay: React.FC = () => {
       loading="lazy"
       allowFullScreen
       referrerPolicy="no-referrer-when-downgrade"
-      src={`https://www.google.com/maps?q=${latitude},${longitude}&hl=es;z=14&output=embed`}
+      src={`https://www.google.com/maps?q=${latitude},${longitude}&hl=es;z=14&z=${zoom}&output=embed`}
     ></iframe>
   );
 };
