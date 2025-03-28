@@ -1,5 +1,5 @@
 import Head from "next/head";
-import BatteryDisplay from "@components/displays/BatteryDisplay";
+import DataDisplay from "@components/displays/DataDisplay";
 import LocatorDisplay from "@components/displays/LocatorDisplay";
 
 export default function Homepage() {
@@ -10,10 +10,10 @@ export default function Homepage() {
                 <title>Homepage</title>
             </Head>
 
-            <main>
-                <div className="flex flex-col">
+            <main className="flex">
+                <div className="">
                     <LocatorDisplay/>
-                    <BatteryDisplay percentage={20}/>
+                    <DataDisplay percentage={20}/>
                 </div>
             </main>
         </>
