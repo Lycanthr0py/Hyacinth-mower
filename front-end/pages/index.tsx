@@ -10,8 +10,8 @@ export default function Homepage() {
                 <title>Homepage</title>
             </Head>
 
-            <main className="flex">
-                <div className="">
+            <main className="flex flex-row items-start gap-8">
+                <div className="flex flex-row items-start gap-8">
                     <LocatorDisplay/>
                     <DataDisplay percentage={20}/>
                 </div>

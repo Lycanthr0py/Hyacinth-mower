@@ -7,16 +7,18 @@ const LocatorDisplay: React.FC = () => {
   const zoom = 14;
 
   return (
-    <iframe
-      ref={mapRef}
-      width="70%"
-      height="600px"
-      style={{ border: 0 }}
-      loading="lazy"
-      allowFullScreen
-      referrerPolicy="no-referrer-when-downgrade"
-      src={`https://www.google.com/maps?q=${latitude},${longitude}&hl=es;z=14&z=${zoom}&output=embed`}
-    ></iframe>
+    <div className="w-auto">
+      <iframe
+        ref={mapRef}
+        width="70%"
+        height="600px"
+        style={{ border: 0 }}
+        loading="lazy"
+        allowFullScreen
+        referrerPolicy="no-referrer-when-downgrade"
+        src={`https://www.google.com/maps?q=${latitude},${longitude}&hl=es;z=14&z=${zoom}&output=embed`}
+      ></iframe>
+    </div>
   );
 };
 

@@ -17,7 +17,7 @@ const DataDisplay: React.FC<DataDisplay> = ({ percentage }) => {
     const strokeDashoffset = ((100 - percentage) / 100) * circumference;
   
     return (
-        <section className="flex flex-row items-center gap-4">
+        <section className="w-auto">
             {/* Displays battery */}
             <div className="">
                 <svg width="200" height="200" viewBox="0 0 200 200">
