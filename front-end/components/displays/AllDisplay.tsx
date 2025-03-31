@@ -2,16 +2,16 @@ import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 interface AllDisplay {
-    percentage: number;
+    battery: number;
 }
 
-const getColor = (percentage: number) => {
-    if (percentage > 50) return "#4CAF50"; // Green
-    if (percentage > 20) return "#FFC107"; // Yellow
+const getColor = (battery: number) => {
+    if (battery > 50) return "#4CAF50"; // Green
+    if (battery > 20) return "#FFC107"; // Yellow
     return "#F44336"; // Red
 };
 
-const AllDisplay: React.FC<AllDisplay> = ({ percentage }) => {
+const AllDisplay: React.FC<AllDisplay> = ({ battery }) => {
   const mapRef = useRef<HTMLIFrameElement>(null);
   const latitude = -25.747592;
   const longitude = 27.864435;
@@ -19,7 +19,7 @@ const AllDisplay: React.FC<AllDisplay> = ({ percentage }) => {
 
   const radius = 75;
   const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = ((100 - percentage) / 100) * circumference;
+  const strokeDashoffset = ((100 - battery) / 100) * circumference;
 
   return (
     <>
@@ -55,7 +55,7 @@ const AllDisplay: React.FC<AllDisplay> = ({ percentage }) => {
                 cy="100"
                 r={radius}
                 fill="none"
-                stroke={getColor(percentage)}
+                stroke={getColor(battery)}
                 strokeWidth="10"
                 strokeDasharray={circumference}
                 strokeDashoffset={strokeDashoffset}
@@ -74,7 +74,7 @@ const AllDisplay: React.FC<AllDisplay> = ({ percentage }) => {
                 fill="#333"
               >
                 <tspan x="50%" dy="0">Battery:</tspan>
-                <tspan x="50%" dy="1.2em">{percentage}%</tspan>
+                <tspan x="50%" dy="1.2em">{battery}%</tspan>
               </text>
             </svg>
           </div>

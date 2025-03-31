@@ -11,7 +11,7 @@ export default function Homepage() {
 
             <main className="flex flex-row items-start gap-8">
                 <div className="flex flex-row items-start gap-8">
-                    <AllDisplay percentage={20}/>
+                    <AllDisplay battery={20}/>
                 </div>
             </main>
         </>
