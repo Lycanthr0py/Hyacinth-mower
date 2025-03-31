@@ -1,6 +1,5 @@
 import Head from "next/head";
-import DataDisplay from "@components/displays/DataDisplay";
-import LocatorDisplay from "@components/displays/LocatorDisplay";
+import AllDisplay from "@components/displays/AllDisplay";
 
 export default function Homepage() {
 
@@ -12,8 +11,7 @@ export default function Homepage() {
 
             <main className="flex flex-row items-start gap-8">
                 <div className="flex flex-row items-start gap-8">
-                    <LocatorDisplay/>
-                    <DataDisplay percentage={20}/>
+                    <AllDisplay percentage={20}/>
                 </div>
             </main>
         </>
