@@ -84,6 +84,11 @@ const AllDisplay: React.FC<AllDisplay> = ({ battery }) => {
         <div className="w-full text-center">
             <h2>Distance travelled today: [placeholder]</h2>
         </div>
+
+        {/* Displays activity graph */}
+        <div>
+          
+        </div>
       </div>
     </>
   );
