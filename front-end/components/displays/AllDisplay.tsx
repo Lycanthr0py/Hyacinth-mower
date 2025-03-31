@@ -23,29 +23,29 @@ const AllDisplay: React.FC<AllDisplayProps> = ({ battery }) => {
 
   return (
     <div className="p-4 w-full" style={{ display: 'flex', flexDirection: 'row', gap: '32px' }}>
-      {/* Map Container - takes 70% width */}
-      <div style={{ flex: '0 0 70%', minWidth: 0 }}>
+      {/* Map Container - takes 60% width */}
+      <div style={{ flex: '0 0 60%', minWidth: 0 }}>
         <iframe
           ref={mapRef}
           style={{ 
             width: '100%',
-            height: '400px',
+            height: '600px',
             border: '0',
             minWidth: '0' // Critical to prevent overflow
           }}
           loading="lazy"
           allowFullScreen
           referrerPolicy="no-referrer-when-downgrade"
-          src={`https://www.google.com/maps?q=${latitude},${longitude}&hl=es&z=${zoom}&output=embed`}
+          src={`https://www.google.com/maps?q=${latitude},${longitude}&hl=en&z=${zoom}&output=embed`}
         />
       </div>
 
-      {/* Battery Container - takes 30% width */}
+      {/* Battery Container - takes 5% width */}
       <div style={{ 
-        flex: '0 0 30%',
+        flex: '0 0 5%',
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        // alignItems: 'center',
+        // justifyContent: 'center'
       }}>
         <svg width="200" height="200" viewBox="0 0 200 200">
           <circle

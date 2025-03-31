@@ -1,5 +1,22 @@
 import Head from "next/head";
 import AllDisplay from "@components/displays/AllDisplay";
+import StatisticDisplay from "@components/displays/StatisticDisplay";
+
+const sampleData = [
+    { time: '06:00', distance: 500 },
+    { time: '07:00', distance: 1800 },
+    { time: '08:00', distance: 0 },
+    { time: '09:00', distance: 800 },
+    { time: '10:00', distance: 1500 },
+    { time: '11:00', distance: 1000 },
+    { time: '12:00', distance: 1200 },
+    { time: '13:00', distance: 2000 },
+    { time: '14:00', distance: 2500 },
+    { time: '15:00', distance: 3200 },
+    { time: '16:00', distance: 0 },
+    { time: '17:00', distance: 2000 },
+    { time: '18:00', distance: 800 },
+];
 
 export default function Homepage() {
 
@@ -12,6 +29,7 @@ export default function Homepage() {
             <main className="flex flex-row items-start gap-8">
                 <div className="flex flex-row items-start gap-8">
                     <AllDisplay battery={20}/>
+                    <StatisticDisplay data={sampleData}/>
                 </div>
             </main>
         </>
