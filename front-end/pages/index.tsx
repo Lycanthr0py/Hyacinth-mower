@@ -1,6 +1,6 @@
 import Head from "next/head";
 import AllDisplay from "@components/displays/AllDisplay";
-import StatisticDisplay from "@components/displays/StatisticDisplay";
+import Header from "@components/header/Header";
 
 const sampleData = [
     { time: '06:00', distance: 500 },
@@ -25,13 +25,15 @@ export default function Homepage() {
             <Head>
                 <title>Homepage</title>
             </Head>
+            <Header/>
 
-            <main className="flex flex-row items-start gap-8">
-                <div className="flex flex-row items-start gap-8">
-                    <AllDisplay battery={20}/>
-                    <StatisticDisplay data={sampleData}/>
-                </div>
-            </main>
+            <body className="m-0 p-0 box-border">
+                <main className="flex flex-row items-start gap-8">
+                    <div className="flex flex-row items-start gap-8">
+                        <AllDisplay battery={75} data={sampleData}/>
+                    </div>
+                </main>
+            </body>
         </>
     )
 }
