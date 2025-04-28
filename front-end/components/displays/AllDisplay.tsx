@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
+type MachineStatus = "operational" | "obstructed" | "malfunction";
+
 interface DataPoint {
   time: string;  // "xx:xx" format
   distance: number; // in meters
@@ -10,23 +12,57 @@ interface DataPoint {
 interface AllDisplayProps {
     battery: number;
     data: DataPoint[];
+    status: MachineStatus;
 }
 
-const getColor = (battery: number) => {
+const getBatteryColor = (battery: number) => {
     if (battery > 50) return "#4CAF50"; // Green
     if (battery > 20) return "#FFC107"; // Yellow
     return "#F44336"; // Red
 };
 
-const AllDisplay: React.FC<AllDisplayProps> = ({ battery, data }) => {
+const AllDisplay: React.FC<AllDisplayProps> = ({ battery, data, status }) => {
+  // Map parameters
   const mapRef = useRef<HTMLIFrameElement>(null);
   const latitude = -25.747592;
   const longitude = 27.864435;
   const zoom = 14;
 
-  const radius = 75;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = ((100 - battery) / 100) * circumference;
+  // Battery parameters
+  const batteryRadius = 75;
+  const batteryCircumference = 2 * Math.PI * batteryRadius;
+  const batteryStrokeDashoffset = ((100 - battery) / 100) * batteryCircumference;
+
+  // Status parameters
+  const statusRadius = 75
+  const statusCircumference = 2 * Math.PI * statusRadius;
+  const statusStrokeDashoffset = 0; // Always full, so offset = 0
+
+  const getStatusColor = (status: MachineStatus) => {
+    switch (status) {
+      case "operational":
+        return "#4CAF50"; // Green
+      case "obstructed":
+        return "#FFC107"; // Yellow
+      case "malfunction":
+        return "#F44336"; // Red
+      default:
+        return "#E0E0E0"; // Grey fallback
+    }
+  };
+
+  const getStatusText = (status: MachineStatus) => {
+    switch (status) {
+      case "operational":
+        return "Operational";
+      case "obstructed":
+        return "Obstructed";
+      case "malfunction":
+        return "Malfunction";
+      default:
+        return "";
+    }
+  };
 
   return (
     <div className="p-4 w-full" style={{ display: 'flex', flexDirection: 'row', gap: '32px' }}>
@@ -55,7 +91,7 @@ const AllDisplay: React.FC<AllDisplayProps> = ({ battery, data }) => {
             <circle
               cx="100"
               cy="100"
-              r={radius}
+              r={batteryRadius}
               fill="none"
               stroke="#E0E0E0"
               strokeWidth="8"
@@ -63,15 +99,15 @@ const AllDisplay: React.FC<AllDisplayProps> = ({ battery, data }) => {
             <motion.circle
               cx="100"
               cy="100"
-              r={radius}
+              r={batteryRadius}
               fill="none"
-              stroke={getColor(battery)}
+              stroke={getBatteryColor(battery)}
               strokeWidth="10"
-              strokeDasharray={circumference}
-              strokeDashoffset={strokeDashoffset}
+              strokeDasharray={batteryCircumference}
+              strokeDashoffset={batteryStrokeDashoffset}
               strokeLinecap="round"
-              initial={{ strokeDashoffset: circumference }}
-              animate={{ strokeDashoffset }}
+              initial={{ strokeDashoffset: batteryCircumference }}
+              animate={{ strokeDashoffset: batteryStrokeDashoffset }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
             />
             <text
@@ -85,6 +121,47 @@ const AllDisplay: React.FC<AllDisplayProps> = ({ battery, data }) => {
             >
               <tspan x="50%" dy="0">Battery:</tspan>
               <tspan x="50%" dy="1.2em">{battery}%</tspan>
+            </text>
+          </svg>
+
+          <svg width="200" height="200" viewBox="0 0 200 200">
+            {/* Background circle */}
+            <circle
+              cx="100"
+              cy="100"
+              r={statusRadius}
+              fill="none"
+              stroke="#E0E0E0"
+              strokeWidth="8"
+            />
+                
+            {/* Animated status circle */}
+            <motion.circle
+              cx="100"
+              cy="100"
+              r={statusRadius}
+              fill="none"
+              stroke={getStatusColor(status)}
+              strokeWidth="10"
+              strokeDasharray={statusCircumference}
+              strokeDashoffset={statusStrokeDashoffset}
+              strokeLinecap="round"
+              initial={{ strokeDashoffset: statusCircumference }}
+              animate={{ strokeDashoffset: 0 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+            />
+          
+            {/* Status Text */}
+            <text
+              x="50%"
+              y="50%"
+              dominantBaseline="middle"
+              textAnchor="middle"
+              fontSize="24"
+              fontWeight="bold"
+              fill="#333"
+            >
+              <tspan x="50%" dy="0">{getStatusText(status)}</tspan>
             </text>
           </svg>
         </div>

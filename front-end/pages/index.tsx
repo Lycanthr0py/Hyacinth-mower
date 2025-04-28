@@ -30,7 +30,7 @@ export default function Homepage() {
             <body className="m-0 p-0 box-border">
                 <main className="flex flex-row items-start gap-8">
                     <div className="flex flex-row items-start gap-8">
-                        <AllDisplay battery={75} data={sampleData}/>
+                        <AllDisplay battery={75} data={sampleData} status={"malfunction"}/>
                     </div>
                 </main>
             </body>
