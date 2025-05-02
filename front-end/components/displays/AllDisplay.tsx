@@ -28,15 +28,17 @@ const AllDisplay: React.FC<AllDisplayProps> = ({ battery, data, status }) => {
   const longitude = 27.864435;
   const zoom = 14;
 
+  const radius = 75;
   // Battery parameters
-  const batteryRadius = 75;
-  const batteryCircumference = 2 * Math.PI * batteryRadius;
+  const batteryCircumference = 2 * Math.PI * radius;
   const batteryStrokeDashoffset = ((100 - battery) / 100) * batteryCircumference;
 
   // Status parameters
-  const statusRadius = 75
-  const statusCircumference = 2 * Math.PI * statusRadius;
+  const statusCircumference = 2 * Math.PI * radius;
   const statusStrokeDashoffset = 0; // Always full, so offset = 0
+
+  // Recall button parameters
+  const strokeWidth = 8;
 
   const getStatusColor = (status: MachineStatus) => {
     switch (status) {
@@ -85,13 +87,14 @@ const AllDisplay: React.FC<AllDisplayProps> = ({ battery, data, status }) => {
   
       {/* Right Side: Battery on top, Chart below */}
       <div style={{ flex: '0 0 40%', display: 'flex', flexDirection: 'column', gap: '32px' }}>
-        {/* Battery Container */}
-        <div style={{ flex: '0 0 auto', display: 'flex', justifyContent: 'left' }}>
+        <div style={{ flex: '0 0 auto', display: 'flex', justifyContent: 'left', marginTop: '1rem' }}>
+
+          {/* Battery Container */}
           <svg width="200" height="200" viewBox="0 0 200 200">
             <circle
               cx="100"
               cy="100"
-              r={batteryRadius}
+              r={radius}
               fill="none"
               stroke="#E0E0E0"
               strokeWidth="8"
@@ -99,7 +102,7 @@ const AllDisplay: React.FC<AllDisplayProps> = ({ battery, data, status }) => {
             <motion.circle
               cx="100"
               cy="100"
-              r={batteryRadius}
+              r={radius}
               fill="none"
               stroke={getBatteryColor(battery)}
               strokeWidth="10"
@@ -115,7 +118,7 @@ const AllDisplay: React.FC<AllDisplayProps> = ({ battery, data, status }) => {
               y="45%"
               dominantBaseline="middle"
               textAnchor="middle"
-              fontSize="24"
+              fontSize="25"
               fontWeight="bold"
               fill="#333"
             >
@@ -124,22 +127,20 @@ const AllDisplay: React.FC<AllDisplayProps> = ({ battery, data, status }) => {
             </text>
           </svg>
 
+          {/* Status container */}
           <svg width="200" height="200" viewBox="0 0 200 200">
-            {/* Background circle */}
             <circle
               cx="100"
               cy="100"
-              r={statusRadius}
+              r={radius}
               fill="none"
               stroke="#E0E0E0"
               strokeWidth="8"
-            />
-                
-            {/* Animated status circle */}
+            />                
             <motion.circle
               cx="100"
               cy="100"
-              r={statusRadius}
+              r={radius}
               fill="none"
               stroke={getStatusColor(status)}
               strokeWidth="10"
@@ -150,20 +151,53 @@ const AllDisplay: React.FC<AllDisplayProps> = ({ battery, data, status }) => {
               animate={{ strokeDashoffset: 0 }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
             />
-          
-            {/* Status Text */}
             <text
               x="50%"
               y="50%"
               dominantBaseline="middle"
               textAnchor="middle"
-              fontSize="24"
+              fontSize="25"
               fontWeight="bold"
               fill="#333"
             >
               <tspan x="50%" dy="0">{getStatusText(status)}</tspan>
             </text>
           </svg>
+
+          {/* Recall button container */}
+          <motion.svg
+            width="200"
+            height="200"
+            viewBox="0 0 200 200"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            style={{ cursor: 'pointer' }}
+            onClick={() => {
+              // Add recall logic here
+              console.log('Recalled to station');
+            }}
+          >
+            <circle
+              cx="100"
+              cy="100"
+              r={radius}
+              fill="#4CAF50"
+              stroke="#2E7D32"
+              strokeWidth={strokeWidth}
+            />
+            <text
+              x="50%"
+              y="45%"
+              dominantBaseline="middle"
+              textAnchor="middle"
+              fontSize="25"
+              fontWeight="bold"
+              fill="#fff"
+            >
+              <tspan x="50%" dy="0">Recall</tspan>
+              <tspan x="50%" dy="1.2em">to station</tspan>
+            </text>
+          </motion.svg>
         </div>
   
         {/* Distance Chart Container */}
