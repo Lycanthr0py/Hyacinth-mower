@@ -29,7 +29,7 @@ export default function Homepage() {
 
             <main className="flex flex-row items-start gap-8">
                 <div className="flex flex-row items-start gap-8">
-                    <AllDisplay battery={75} data={sampleData} status={"obstructed"}/>
+                    <AllDisplay battery={75} data={sampleData} status={4}/>
                 </div>
             </main>
         </>

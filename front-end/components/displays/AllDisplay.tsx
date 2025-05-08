@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-type MachineStatus = "operational" | "obstructed" | "malfunction";
+type MachineStatus = 4 | 1 | 0;
 
 interface DataPoint {
   time: string;  // "xx:xx" format
@@ -42,11 +42,11 @@ const AllDisplay: React.FC<AllDisplayProps> = ({ battery, data, status }) => {
 
   const getStatusColor = (status: MachineStatus) => {
     switch (status) {
-      case "operational":
+      case 4:
         return "#4CAF50"; // Green
-      case "obstructed":
+      case 1:
         return "#FFC107"; // Yellow
-      case "malfunction":
+      case 0:
         return "#F44336"; // Red
       default:
         return "#E0E0E0"; // Grey fallback
@@ -55,11 +55,11 @@ const AllDisplay: React.FC<AllDisplayProps> = ({ battery, data, status }) => {
 
   const getStatusText = (status: MachineStatus) => {
     switch (status) {
-      case "operational":
+      case 4:
         return "Operational";
-      case "obstructed":
+      case 1:
         return "Obstructed";
-      case "malfunction":
+      case 0:
         return "Malfunction";
       default:
         return "";
